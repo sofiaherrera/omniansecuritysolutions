@@ -1,42 +1,40 @@
+// File: components/Header.jsx
 import Image from 'next/image';
 import Link from 'next/link';
-import netlifyLogo from 'public/netlify-logo.svg';
-import githubLogo from 'public/images/github-mark-white.svg';
 
-const navItems = [
-    { linkText: 'Home', href: '/' },
-    { linkText: 'Revalidation', href: '/revalidation' },
-    { linkText: 'Image CDN', href: '/image-cdn' },
-    { linkText: 'Edge Function', href: '/edge' },
-    { linkText: 'Blobs', href: '/blobs' },
-    { linkText: 'Classics', href: '/classics' }
-];
+export default function Header() {
+  return (
+    <header className="flex items-center justify-between px-6 py-4 bg-[#111111]">
+      {/* LEFT: Logo & Branding */}
+      <div className="flex items-center space-x-2">
+        {/* Logo Image - fingerprint.svg should be in the public/ folder */}
+        <div className="relative w-8 h-8">
+          <Image
+            src="/fingerprint.svg"
+            alt="Omnian Security Solutions Logo"
+            fill
+            style={{ objectFit: 'contain' }}
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        </div>
+        <span className="text-white font-semibold text-lg">
+          OMNIAN SECURITY SOLUTIONS
+        </span>
+      </div>
 
-export function Header() {
-    return (
-        <nav className="flex flex-wrap items-center gap-4 pt-6 pb-12 sm:pt-12 md:pb-24">
-            <Link href="/">
-                <Image src={netlifyLogo} alt="Netlify logo" />
-            </Link>
-            {!!navItems?.length && (
-                <ul className="flex flex-wrap gap-x-4 gap-y-1">
-                    {navItems.map((item, index) => (
-                        <li key={index}>
-                            <Link href={item.href} className="inline-flex px-1.5 py-1 sm:px-3 sm:py-2">
-                                {item.linkText}
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            )}
-            <Link
-                href="https://github.com/netlify-templates/next-platform-starter"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden lg:inline-flex lg:ml-auto"
-            >
-                <Image src={githubLogo} alt="GitHub logo" className="w-7" />
-            </Link>
-        </nav>
-    );
+      {/* CENTER: Navigation */}
+      <nav className="hidden md:flex items-center space-x-8">
+        <Link href="/about" className="text-white hover:text-gray-300 transition-colors">
+          About Us
+        </Link>
+      </nav>
+
+      {/* RIGHT: Contact Us Button */}
+      <Link href="/contact">
+        <button className="bg-[#F2573D] text-white font-semibold py-2 px-4 rounded hover:bg-[#E3472D] transition-colors">
+          Contact Us
+        </button>
+      </Link>
+    </header>
+  );
 }
